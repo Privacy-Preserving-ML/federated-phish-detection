@@ -1,0 +1,1 @@
+Behind the scenes: The training iterations required for the model were processed on a server using a program written in Python. This model was then converted into a JSON format. The training samples were sourced from quarantined email messages from the UNU MS 365 tenant. These messages were truncated to a maximum of 200 words, with the 400K most used words considered.
