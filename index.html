@@ -1,0 +1,81 @@
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.2.0"></script>
+  <script src="js/script.js" type="module"></script> 
+  <title>Federated Phish Bowl</title>
+</head>
+
+<body style="background-image: url('css/bk.png'); background-size: cover;">
+<div id="container" align="center" style="padding-top:8%">
+  <div style="width:40%; color: black; font-size:20;">
+    <p class = "main">This example demonstrates the operation of a pre-trained deep neural network model in a browser. The model assesses the message's trustworthiness by assigning a score between 0 and 1, where 0 is the lowest confidence level given to the classification result.
+    <a href = "readme.txt" target="_blank"><i class="fa fa-info-circle" style="font-size:24px"></i></a>
+    </p>
+  </div>  
+<br>
+<textarea type="text" name="text" placeholder="Input the subject and the message body here." rows="10" cols="80"></textarea>
+<br>
+<br>
+<br>
+<button class="button">Predict</button>
+<br><br>
+<div><b><p id="demo" style="color:red; font-size: 24;"></p></b></div>
+<ul class='likert'>
+  <li>
+    <input type="radio" name="likert" id="highphishing">
+    <label>High-confidence phishing</label>
+  </li>
+  <li>
+    <input type="radio" name="likert" id="phishing">
+    <label>Phishing</label>
+  </li>
+  <li>
+    <input type="radio" name="likert" id="neutral">
+    <label>Neutral</label>
+  </li>
+  <li>
+    <input type="radio" name="likert" id="benign">
+    <label>Benign</label>
+  </li>
+  <li>
+    <input type="radio" name="likert" id="highbenign">
+    <label>High-confidence benign</label>
+  </li>
+</ul>
+<!--
+<table>
+<tr>
+<td width=40%> 
+
+</td>
+<td  width=40%>
+<p>Choose your opinion:</p>
+<div>
+  <input type="radio" id="phishing" name="phishing"
+         checked>
+  <label for="phishing">This is a phishing sample.</label>
+  </div>
+  <div>
+  <input type="radio" id="benign" name="benign">
+  <label for="benign">This is a benign sample.</label>
+</div>
+</td>
+</tr>
+</table>
+<-->
+</div>
+
+
+</div>
+</body>
+
+<div id="footer">
+<p>@United Nations University. All Rights Reserved. 2021</p>
+</div>
+
+</html>
