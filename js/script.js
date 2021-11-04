@@ -49,16 +49,15 @@ const predict = (text, model, metadata) => {
     .split(" ")
     .filter(item => item);
   
-  const sequence = trimmed.map((word) => {
-  	const wordIndex = metadata[word];
-  	if (typeof wordIndex === 'undefined') { 
-    //length of words need confirmation
-    return new Array(100).fill(0)
-  	}
-    else{return wordIndex;}
+  //letimization  
+  const sequence = trimmed.filter(word => word.length > 3 && typeof metadata[word] !== 'undefined');
+  console.log(sequence);
+  const sequencematrix = sequence.map((word) =>
+  {
+    const wordIndex = metadata[word];
+    return wordIndex;
   });
-  console.log(sequence)
-  const paddedsequence = padSequences(sequence, 200)
+  const paddedsequence = padSequences(sequencematrix, 200)
   const input = tf.tensor2d(paddedsequence).reshape([1,200,100]);
   const predictOut = model.predict(input);
   const score = predictOut.dataSync()[0];
