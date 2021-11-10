@@ -42,7 +42,7 @@ p.main {
   width:100%;
   margin:0;
   padding:0 0 35px;
-  font-size: 18;
+  font-size: 28;
   display:block;
   border-bottom:2px solid #efefef;
 }
@@ -58,7 +58,7 @@ p.main {
 }
 .likert li {
   display:inline-block;
-  width:10%;
+  width:13%;
   text-align:center;
   vertical-align: top;
 }

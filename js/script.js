@@ -49,7 +49,6 @@ const predict = (text, model, metadata) => {
     .split(" ")
     .filter(item => item);
   
-  //letimization  
   const sequence = trimmed.filter(word => word.length > 3 && typeof metadata[word] !== 'undefined');
   console.log(sequence);
   const sequencematrix = sequence.map((word) =>
@@ -57,8 +56,8 @@ const predict = (text, model, metadata) => {
     const wordIndex = metadata[word];
     return wordIndex;
   });
-  const paddedsequence = padSequences(sequencematrix, 200)
-  const input = tf.tensor2d(paddedsequence).reshape([1,200,100]);
+  const paddedsequence = padSequences(sequencematrix, 100);
+  const input = tf.tensor2d(paddedsequence).reshape([1, 100, 100]);
   const predictOut = model.predict(input);
   const score = predictOut.dataSync()[0];
   predictOut.dispose();
@@ -66,16 +65,23 @@ const predict = (text, model, metadata) => {
   return score;
 };
 
+const createlink = async () => {
+  var a = document.createElement('a'); 
+  var link = document.createTextNode("(The Generated Report)");
+  a.appendChild(link);   
+  a.title = "(The Generated Report)"; 
+  a.href = "";
+  document.getElementById("report").innerHTML = ""; 
+  document.getElementById("report").append(a); 
+}
+
 const getSentiment = (score) => {
   console.log(score)
-  if (score > 0.8){document.getElementById("highphishing").checked = true;}
-  else if (score > 0.6){document.getElementById("phishing").checked = true;}
-  else if (score> 0.4){document.getElementById("neutral").checked = true;}
-  else if (score > 0.2){document.getElementById("benign").checked = true;}
-  else {document.getElementById("highbenign").checked = true;}
-  document.getElementById("demo").innerHTML = score.toFixed(3)
+  if (score > 0.9){document.getElementById("highphishing").checked = true; document.getElementById("demo").innerHTML = "This is a high-confidence phishing email. Report it to the administrator."; createlink();}//score.toFixed(3)}
+  else if (score > 0.5){document.getElementById("phishing").checked = true; document.getElementById("demo").innerHTML = "This seems to be a phishing email. Report it to the administrator to confirm."; createlink();}
+  else if (score > 0.1){document.getElementById("benign").checked = true; document.getElementById("demo").innerHTML = "This seems to be a legitimate email. Report it to the administrator to confirm."; createlink();}
+  else {document.getElementById("highbenign").checked = true; document.getElementById("demo").innerHTML = "This is a high-confidence legitimate email."}
 };
-
 
 const run = async (text) => {
   console.log(text)
@@ -87,7 +93,6 @@ const run = async (text) => {
   console.log('predicted')
   getSentiment(perc)
 };
-
 
 window.onload = () => {
   const inputText = document.getElementsByTagName("textarea")[0];
